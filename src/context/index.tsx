@@ -202,25 +202,27 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
       });
     },
     loadLocalCoding: () => {
-      setlocalTasklist((prev) => {
+      setTask((prev) => {
+        prev.storedtasks_coding.splice(0,prev.storedtasks_coding.length)
         const getLocalstorage = localStorage.getItem("localStorageTask");
         if (getLocalstorage) {
           const jsonparselist = JSON.parse(getLocalstorage);
           for (let k of jsonparselist) {
-            prev.localstoragetasks.push({
+            prev.storedtasks_coding.push({
               id: k.id,
               content: k.content,
               title: k.title,
               check: k.check,
               detailCheck: k.detailCheck,
-            } as localstoragetask);
+            } as storedtask_coding);
           }
         };
         return {
           ...prev,
-          localstoragetasks: [...prev.localstoragetasks],
+          storedtasks_coding: [...prev.storedtasks_coding],
         };
-      });
+        }
+      );
     },
     selectPageCoding: ()=>{
       setTopic((prev)=>{
