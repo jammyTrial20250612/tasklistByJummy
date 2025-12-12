@@ -18,6 +18,11 @@ export type taskState = {
 
 export type localState = {
   localstoragetasks: localstoragetask[];
+  localstoragetasks_coding: localstoragetask_coding[];
+  localstoragetasks_plans: localstoragetask_plans[];
+  localstoragetasks_servermanagement: localstoragetask_servermanagement[];
+  localstoragetasks_slack: localstoragetask_slack[];
+  localstoragetasks_tips: localstoragetask_tips[];
 };
 
 export type storedtask = {
@@ -69,6 +74,51 @@ export type storedtask_tips = {
 };
 
 export type localstoragetask = {
+  id: number;
+  title: string;
+  content: string;
+  check: boolean;
+  detailCheck?: boolean;
+};
+
+export type localstoragetask_coding = {
+  id: number;
+  title: string;
+  content: string;
+  check: boolean;
+  detailCheck?: boolean;
+};
+
+export type localstoragetask_kintone = {
+  id: number;
+  title: string;
+  content: string;
+  check: boolean;
+  detailCheck?: boolean;
+};
+
+export type localstoragetask_plans = {
+  id: number;
+  title: string;
+  content: string;
+  check: boolean;
+  detailCheck?: boolean;
+};
+export type localstoragetask_servermanagement = {
+  id: number;
+  title: string;
+  content: string;
+  check: boolean;
+  detailCheck?: boolean;
+};
+export type localstoragetask_slack = {
+  id: number;
+  title: string;
+  content: string;
+  check: boolean;
+  detailCheck?: boolean;
+};
+export type localstoragetask_tips = {
   id: number;
   title: string;
   content: string;

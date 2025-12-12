@@ -102,18 +102,12 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
   });
 
   const [localTasklist, setlocalTasklist] = useState<localState>({
-    localstoragetasks: Array(0)
-      .fill(null)
-      .map(
-        (_, i) =>
-          ({
-            id: 1,
-            content: "content",
-            title: "title",
-            check: false,
-            detailCheck: true,
-          } as localstoragetask)
-      ),
+    localstoragetasks: [],
+    localstoragetasks_coding: [],
+    localstoragetasks_plans: [],
+    localstoragetasks_servermanagement: [],
+    localstoragetasks_slack: [],
+    localstoragetasks_tips: [],
   });
 
   const [title, setTitle] = useState<string>("");
@@ -166,7 +160,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
     },
     taskWriteCoding: () => {
       const localStorageTask = JSON.stringify(task.storedtasks_coding);
-      localStorage.setItem("localStorageTask", localStorageTask);
+      localStorage.setItem("localStorageTaskCoding", localStorageTask);
     },
     taskReadCoding: () => {
       setlocalTasklist((prev) => {
@@ -175,7 +169,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
         if (latestTask) {
           id = latestTask.id + 1;
         }
-        const getLocalstorage = localStorage.getItem("localStorageTask");
+        const getLocalstorage = localStorage.getItem("localStorageTaskCoding");
         if (getLocalstorage) {
           const jsonTasklist = JSON.parse(getLocalstorage);
           console.log(jsonTasklist);
@@ -204,7 +198,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
     loadLocalCoding: () => {
       setTask((prev) => {
         prev.storedtasks_coding.splice(0,prev.storedtasks_coding.length)
-        const getLocalstorage = localStorage.getItem("localStorageTask");
+        const getLocalstorage = localStorage.getItem("localStorageTaskCoding");
         if (getLocalstorage) {
           const jsonparselist = JSON.parse(getLocalstorage);
           for (let k of jsonparselist) {
@@ -232,7 +226,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
         window.location.replace({url}+"/"+prev.selectTopic);
         }
         return {
-          ...prev, selectTopic : "Servermanagement",
+          ...prev, selectTopic : "Coding",
         };
       });
     },
@@ -308,13 +302,15 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
         };
       });
     },
+        ///////loadLocal=loadLocalKintone
     loadLocal: () => {
-      setlocalTasklist((prev) => {
+        setTask((prev) => {
+        prev.storedtasks.splice(0,prev.storedtasks.length)
         const getLocalstorage = localStorage.getItem("localStorageTask");
         if (getLocalstorage) {
           const jsonparselist = JSON.parse(getLocalstorage);
           for (let k of jsonparselist) {
-            prev.localstoragetasks.push({
+            prev.storedtasks.push({
               id: k.id,
               content: k.content,
               title: k.title,
@@ -325,7 +321,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
         };
         return {
           ...prev,
-          localstoragetasks: [...prev.localstoragetasks],
+          localstoragetasks: [...prev.storedtasks],
         };
       });
     },
@@ -337,7 +333,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
         window.location.replace({url}+"/"+prev.selectTopic);
         }
         return {
-          ...prev, selectTopic : "Servermanagement",
+          ...prev, selectTopic : "Kintone",
         };
       });
     },
@@ -376,7 +372,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
       },
       taskWritePlans: () => {
         const localStorageTask = JSON.stringify(task.storedtasks_plans);
-        localStorage.setItem("localStorageTask", localStorageTask);
+        localStorage.setItem("localStorageTaskPlans", localStorageTask);
       },
       taskReadPlans: () => {
         setlocalTasklist((prev) => {
@@ -440,7 +436,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
           window.location.replace({url}+"/"+prev.selectTopic);
           }
           return {
-            ...prev, selectTopic : "Servermanagement",
+            ...prev, selectTopic : "Plans",
           };
         });
       },
@@ -756,7 +752,7 @@ export const TaskFieldContextProvider: React.FC<Props> = ({ children }) => {
           window.location.replace({url}+"/"+prev.selectTopic);
           }
           return {
-            ...prev, selectTopic : "Servermanagement",
+            ...prev, selectTopic : "Tips",
           };
         });
       },
