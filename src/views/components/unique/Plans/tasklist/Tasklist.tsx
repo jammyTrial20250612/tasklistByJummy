@@ -34,6 +34,10 @@ const Tasklist: React.FC = () => {
     Read();
   }
 
+  function localDelete() {
+    localStorage.clear();
+  }
+
   return (
     <section className="static bg-red-50 h-screen">
       <div>
@@ -66,7 +70,7 @@ const Tasklist: React.FC = () => {
           <ul className="absolute top-5/24 left-1/4 m-4">
             <li className="text-center">
               <button
-                className="bg-cyan-400 text-2xl text-white w-32 h-20"
+                className="bg-cyan-400 text-2xl text-white w-36 h-20 mb-8"
                 type="button"
                 onClick={() => create()}
               >
@@ -75,7 +79,16 @@ const Tasklist: React.FC = () => {
             </li>
             <li>
               <button
-                className="bg-green-300 text-white text-2xl w-32 h-20 my-24"
+                className="bg-red-400 text-white text-2xl w-36 h-20 mb-8"
+                type="button"
+                onClick={() => Task.deleteAllPlans()}
+              >
+                delete
+              </button>
+            </li>
+                        <li>
+              <button
+                className="bg-green-300 text-white text-2xl w-36 h-20 mb-8"
                 type="button"
                 onClick={() => localCheck()}
               >
@@ -84,12 +97,21 @@ const Tasklist: React.FC = () => {
             </li>
             <li>
               <button
-                className="bottom-0 bg-red-400 text-white text-2xl w-32 h-20"
+                className="bg-yellow-200 text-white text-2xl w-36 h-20 mb-8"
                 type="button"
-                onClick={() => Task.deleteAllPlans()}
+                onClick={() => Task.loadLocalPlans()}
               >
-                delete
+                Load
               </button>
+            </li>
+            <li>
+              <button
+            className="bg-pink-400 text-white text-2xl w-36 h-20 mb-8"
+            type="button"
+            onClick={() => localDelete()}
+          >
+            Cache Clear
+          </button>
             </li>
           </ul>
         </div>

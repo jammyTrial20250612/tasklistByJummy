@@ -69,6 +69,17 @@ const Taskstore: React.FC<Props> = ({ storedtask_coding, idx }) => {
               <div className="text-center w-32">
                 <TaskDetail storedtask_coding={storedtask_coding} idx={idx} />
               </div>
+              <div>
+                <button
+                  className="bg-red-400 text-white px-2 py-2 m-4"
+                  type="button"
+                  onClick={() =>
+                    Task.deleteCoding(storedtask_coding.id)
+                  }
+                >
+                  delete
+                </button>
+              </div>
             </div>
           </li>
         </ul>

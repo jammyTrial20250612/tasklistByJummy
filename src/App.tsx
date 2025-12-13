@@ -37,7 +37,7 @@ const App:React.FC = () => {
             <li className="basis-1/6 text-2xl text-center m-0 hover:bg-pink-50 text-pink-300"><Link to="/slack" onClick={()=>setPageTitle({selectTopic: "Slack"})}><p className="py-4 w-xl h-16">Slack</p></Link></li>
             <li className="basis-1/6 text-2xl text-center m-0 hover:bg-violet-50 text-violet-300"><Link to="/servermanagement" onClick={()=>setPageTitle({selectTopic: "Servermanagement"})}><p className="py-4 w-xl h-16">Servermanagement</p></Link></li>
             <li className="basis-1/6 text-2xl text-center m-0 hover:bg-yellow-50 text-yellow-300"><Link to="/tips" onClick={()=>setPageTitle({selectTopic: "Tips"})}><p className="py-4 w-xl h-16">Tips</p></Link></li>
-            <li className="basis-1/6 text-2xl text-center m-0 hover:bg-red-50 text-black"><Link to="/axios_get" onClick={()=>setPageTitle({selectTopic: "API"})}><p className="py-4 w-xl h-16">API_crud</p></Link></li>
+            {/* <li className="basis-1/6 text-2xl text-center m-0 hover:bg-red-50 text-black"><Link to="/axios_get" onClick={()=>setPageTitle({selectTopic: "API"})}><p className="py-4 w-xl h-16">API_crud</p></Link></li> */}
           </ul>
         </section>
         <section>
@@ -52,7 +52,7 @@ const App:React.FC = () => {
         </footer> */}
         <section className="bg-gray-50">
           <ul className="flex flex-row">
-            <li className="basis-1/6 text-2xl text-center m-0 hover:bg-green-50 text-green-300"><Link to="/mockread" onClick={()=>setPageTitle({selectTopic: "MockRead"})}><p className="py-4 w-xl h-16">MockRead</p></Link></li>
+            {/* <li className="basis-1/6 text-2xl text-center m-0 hover:bg-green-50 text-green-300"><Link to="/mockread" onClick={()=>setPageTitle({selectTopic: "MockRead"})}><p className="py-4 w-xl h-16">MockRead</p></Link></li> */}
           </ul>
         </section>
       </TaskFieldContextProvider>
