@@ -35,6 +35,7 @@ const Tasklist: React.FC<Props> = ({ tag }) => {
                 placeholder="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                data-testid="input-title"
               />
             </li>
             <li className="mx-20">
@@ -44,6 +45,7 @@ const Tasklist: React.FC<Props> = ({ tag }) => {
                 placeholder="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                data-testid="input-content"
               />
             </li>
           </ul>

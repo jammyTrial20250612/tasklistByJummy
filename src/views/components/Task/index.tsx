@@ -11,7 +11,7 @@ const Task: React.FC<Props> = ({ tag }) => {
         <Tasklist tag={tag} />
       </section>
       <section>
-        <h4 className="text-green-300 bg-green-100 text-center py-10 text-2xl font-bold">
+        <h4 className="text-green-300 bg-green-100 text-center py-10 text-2xl font-bold" data-testid={`${tag.toUpperCase()}`}>
           {tag.toUpperCase()}
         </h4>
       </section>

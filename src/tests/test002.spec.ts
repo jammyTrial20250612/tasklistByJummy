@@ -1,8 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { BASE_URL } from './config/constants';
+import { Tag } from '../types';
 
-test('008 coding画面で、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。', async ({ page }) => {
-  await page.goto(BASE_URL+'/coding');
+const tags: Tag[] = ['coding', 'plans', 'kintone', 'servermanagement', 'slack', 'tips'];
+  tags.forEach((tags,i) => {
+  test.beforeEach(async ({ page }) => {
+  await page.goto(BASE_URL+'/'+tags);
+  await expect(page.getByTestId(tags.toUpperCase())).toHaveText(tags.toUpperCase());
+  });
+  test(`00${i+8} ${tags}画面が表示され、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。`, async ({ page }) => {
   const defaulttask = await page.evaluate(() => localStorage.getItem('tasks'));
   expect(defaulttask).toBeNull();
   await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
@@ -10,102 +16,12 @@ test('008 coding画面で、createボタンをクリックし、ローカルス�
   const createdtask = await page.evaluate(() => localStorage.getItem('tasks'));
   expect(createdtask).not.toBeNull();
   await expect(page.getByTestId('task').nth(1)).toBeVisible();
-}); 
-test('009 coding画面で、createボタンをクリックし、できたタスクを削除できる。', async ({ page }) => {
-  await page.goto(BASE_URL+'/coding');
+  }); 
+  test(`00${i+14} ${tags}画面が表示され、createボタンをクリックし、できたタスクをdeleteボタンで削除できる。`, async ({ page }) => {
   await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
   await page.getByTestId('create-button').click();
   await expect(page.getByTestId('task').nth(1)).toBeVisible();
   await page.getByTestId('delete-button').nth(0).click();
   await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-});
-test('010 plans画面で、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。', async ({ page }) => {
-  await page.goto(BASE_URL+'/plans');
-  const defaulttask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(defaulttask).toBeNull();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  const createdtask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(createdtask).not.toBeNull();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-}); 
-test('011 plans画面で、createボタンをクリックし、できたタスクを削除できる。', async ({ page }) => {
-  await page.goto(BASE_URL+'/plans');
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-  await page.getByTestId('delete-button').nth(0).click();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-});
-test('012 kintone画面で、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。', async ({ page }) => {
-  await page.goto(BASE_URL+'/kintone');
-  const defaulttask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(defaulttask).toBeNull();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  const createdtask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(createdtask).not.toBeNull();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-}); 
-test('013 kintone画面で、createボタンをクリックし、できたタスクを削除できる。', async ({ page }) => {
-  await page.goto(BASE_URL+'/kintone');
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-  await page.getByTestId('delete-button').nth(0).click();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-});
-test('014 servermanagement画面で、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。', async ({ page }) => {
-  await page.goto(BASE_URL+'/servermanagement');
-  const defaulttask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(defaulttask).toBeNull();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  const createdtask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(createdtask).not.toBeNull();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-}); 
-test('015 servermanagement画面で、createボタンをクリックし、できたタスクを削除できる。', async ({ page }) => {
-  await page.goto(BASE_URL+'/servermanagement');
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-  await page.getByTestId('delete-button').nth(0).click();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-});
-test('016 slack画面で、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。', async ({ page }) => {
-  await page.goto(BASE_URL+'/slack');
-  const defaulttask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(defaulttask).toBeNull();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  const createdtask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(createdtask).not.toBeNull();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-}); 
-test('017 slack画面で、createボタンをクリックし、できたタスクを削除できる。', async ({ page }) => {
-  await page.goto(BASE_URL+'/slack');
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-  await page.getByTestId('delete-button').nth(0).click();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-});
-test('018 tips画面で、createボタンをクリックし、ローカルストレージに保存されたことを確認し、タスクが表示される。', async ({ page }) => {
-  await page.goto(BASE_URL+'/tips');
-  const defaulttask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(defaulttask).toBeNull();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  const createdtask = await page.evaluate(() => localStorage.getItem('tasks'));
-  expect(createdtask).not.toBeNull();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-}); 
-test('019 tips画面で、createボタンをクリックし、できたタスクを削除できる。', async ({ page }) => {
-  await page.goto(BASE_URL+'/tips');
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
-  await page.getByTestId('create-button').click();
-  await expect(page.getByTestId('task').nth(1)).toBeVisible();
-  await page.getByTestId('delete-button').nth(0).click();
-  await expect(page.getByTestId('task').nth(1)).not.toBeVisible();
+  });
 });
