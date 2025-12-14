@@ -28,24 +28,24 @@ const Tasklist: React.FC<Props> = ({ tag }) => {
       <section className="flex flex-row">
         <div className="basis-1/3">
           <ul className="absolute top-5/24 left-1/8 text-2xl h-1/6 w-3/12">
-            <li className="mx-20">
+            <li className="mx-20" data-testid="input-title">
               <div className="mx-10 text-center">title</div>
               <textarea
                 className="mx-10 my-5 px-5 py-5 border-black rounded-xl w-full h-2/12"
                 placeholder="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                data-testid="input-title"
+                data-testid={`input-title-${tag.toUpperCase()}`}
               />
             </li>
-            <li className="mx-20">
+            <li className="mx-20" data-testid="input-content">
               <div className="mx-10 text-center">content</div>
               <textarea
                 className="mx-10 my-5 px-5 py-20 border-black rounded-xl w-full h-4/12"
                 placeholder="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                data-testid="input-content"
+                data-testid={`input-content-${tag.toUpperCase()}`}
               />
             </li>
           </ul>
