@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
-
-const BASE_URL = 'http://localhost:3000';
+import { BASE_URL } from './config/constants';
 
 test('001 Home画面が表示される', async ({ page }) => {
   await page.goto(BASE_URL);

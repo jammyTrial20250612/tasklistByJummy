@@ -24,7 +24,7 @@ const Taskstore: React.FC<Props> = ({ task }) => {
       <div>
         <ul className="text-2xl font-bold">
           <li className="h-20">
-            <div className="flex flex-row space-x-10">
+            <div data-testid="task" className="flex flex-row space-x-10">
               <div className="text-center py-2 w-16 md:w-full">
                 <p>id</p>
                 {task.id}
@@ -50,6 +50,7 @@ const Taskstore: React.FC<Props> = ({ task }) => {
                   className="bg-red-400 text-white px-2 py-2 m-4"
                   type="button"
                   onClick={taskDelete}
+                  data-testid="delete-button"
                 >
                   delete
                 </button>
